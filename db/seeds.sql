@@ -23,21 +23,24 @@ VALUES ("MKT Analyst", 1000, 001),
        ("CEO", 12000, 005);
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ("Monkey D.", 'Luffy', 013, NULL),
-       ("Bon", 'Clay', 014, NULL),
-       ("Im", 'Sama', 015, NULL),
-       ("Nami", 'Chuan', 001, 003),
-       ("Buggy", 'The Clown', 002, 003),
-       ("Big News", 'Morgans', 003, 005),
-       ("Nefertari", 'Vivi', 004, 006),
-       ("Admiral", 'Sengoku', 005, 006),
-       ("Akagami", 'Shanks', 006, 005),
-       ("MR.", 'Franki', 007, 009),
-       ("Bartholomew", 'Kuma', 008, 009),
-       ("DR.", 'Vegapunk', 009, 005),
-       ("Nico", 'Robin', 010, 012),
-       ("Emporio", 'Ivankov', 011, 012),
-       ("Silvers", 'Rayleigh', 012, 005);
-    --    (013, "Monkey D.", 'Luffy', 013, NULL),
-    --    (014, "Bon", 'Clay', 014, NULL),
-    --    (015, "Im", 'Sama', 015, NULL);
+VALUES ("Monkey D.", 'Luffy', 13, NULL),
+       ("Bon", 'Clay', 14, NULL),
+       ("Im", 'Sama', 15, NULL),
+       ("Big News", 'Morgans', 3, 3),
+       ("Buggy", 'The Clown', 2, 4),
+       ("Nami", 'Chuan', 1, 5),
+      --  ("Buggy", 'The Clown', 2, 4),
+       ("Akagami", 'Shanks', 6, 3),
+       ("Admiral", 'Sengoku', 5, 7),
+       ("Nefertari", 'Vivi', 4, 8),
+    --    ("Akagami", 'Shanks', 6, 3),
+       ("DR.", 'Vegapunk', 9, 3),  
+       ("Bartholomew", 'Kuma', 8, 10), 
+       ("MR.", 'Franki', 7, 11), 
+      --  ("Bartholomew", 'Kuma', 8, 10), 
+    --    ("DR.", 'Vegapunk', 9, 3), 
+       ("Silvers", 'Rayleigh', 12, 3),
+       ("Emporio", 'Ivankov', 11, 13), 
+       ('Nico', 'Robin', 10, 14);
+      --  ("Emporio", 'Ivankov', 11, 13); 
+    --    ("Silvers", 'Rayleigh', 12, 3); 
