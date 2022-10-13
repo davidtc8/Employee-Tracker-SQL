@@ -21,7 +21,7 @@ const principalMenu = () => {
             // create an update Menu
             // create a Delete Menu
             default:
-                break;
+                process.exit();
         }
     });
 };
@@ -55,11 +55,11 @@ const add = () => {
     })
     .then((answer) => {
         if (answer.addtoDatabase === 'back'){return principalMenu();}
-        db.view(answer.addtoDatabase)
+        db.add(answer.addtoDatabase)
     })
 }
 
 // Initialize the principal menu
 principalMenu();
 
-module.exports.showMenu = principalMenu;
+module.exports.principalMenu = principalMenu;
