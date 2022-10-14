@@ -33,11 +33,6 @@ const view = (option) => {
                     name as Department 
                     FROM department;`
             break;
-            // // Printing the query
-            // db.query(query, function (err, results) {
-            //     console.table(results);
-            // });
-            // return app.principalMenu();
         case 'All Roles':
             query = `SELECT roles.id AS Id,
                      roles.title AS Role,
@@ -46,12 +41,6 @@ const view = (option) => {
                      FROM roles
                      JOIN department ON roles.department_id = department.id;`;
             break;
-            // db.query(query, function (err, results) {
-            //     console.table(results);
-            // });
-            // console.log('\n')
-            // console.log('Going back to menu')
-            // return app.principalMenu();
         case 'All Employees':
             query = `SELECT roles.id AS Id,
                      CONCAT(employee.first_name, ' ', employee.last_name) AS Name,
@@ -113,10 +102,23 @@ const add = (option) => {
                 const params = answer.nameofDept;
                 db.query(query, params, function (err, results) {
                     console.table('Successfully added the department');
-                    console.table(results)
+                    return app.principalMenu();
                 });
             })
-            return app.principalMenu();
+        case 'Role':
+            inquirer.prompt({
+                type: 'input',
+                name: 'nameofRole',
+                message: "What's the name of the role you want to add?",
+            })
+            .then((answer) => {
+                query = 'INSERT INTO roles (name) VALUES (?)'
+                const params = answer.nameofRole;
+                db.query(query, params, function (err, results) {
+                    console.table('Successfully added role')
+                    return app.principalMenu();
+                });
+            });
         default:
             console.log('There was an error')
             break;
