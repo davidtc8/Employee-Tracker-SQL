@@ -17,8 +17,10 @@ const principalMenu = () => {
             case 'Add':
                 add();
                 break;
-            // create an add Menu
             // create an update Menu
+            case 'Update':
+                update();
+                break;
             // create a Delete Menu
             default:
                 process.exit();
@@ -41,7 +43,7 @@ const showMenu = () => {
                    '<< Go Back']
     })
     .then((answer) => {
-        if (answer.viewMenu === 'back'){return principalMenu();}
+        if (answer.viewMenu === '<< Go Back'){return principalMenu();}
         db.view(answer.viewMenu)
     });
 }
@@ -54,10 +56,23 @@ const add = () => {
         choices: ['Department', 'Role', 'Employee', '<< Go Back']
     })
     .then((answer) => {
-        if (answer.addtoDatabase === 'back'){return principalMenu();}
+        if (answer.addtoDatabase === '<< Go Back'){return principalMenu();}
         db.add(answer.addtoDatabase)
-    })
+    });
 }
+
+const update = () => {
+    inquirer.prompt({
+        type: 'list',
+        name: 'updateTable',
+        message: 'viewing',
+        choices: ['Update an Employee Role', 'Update an Employee Manager', '<< Go Back']
+    })
+    .then((answer) => {
+        if (answer.updateTable === '<< Go Back'){return principalMenu();}
+        db.update(answer.updateTable)
+    });
+};
 
 // Initialize the principal menu
 principalMenu();
