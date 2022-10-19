@@ -105,27 +105,113 @@ const add = (option) => {
                     return app.principalMenu();
                 });
             })
+            break;
         case 'Role':
-            inquirer.prompt({
-                type: 'input',
+            inquirer.prompt([
+            {
                 name: 'nameofRole',
                 message: "What's the name of the role you want to add?",
-            })
+            },
+            {
+                name: 'salary',
+                message: "What's the salary for this role"
+            },
+            {
+                type: 'list',
+                name: 'departmentId',
+                message: "What's the ID for this department",
+                choices: ['Marketing', 'Legal', 'IT', 'HR', 'Directive Border']
+            },
+            ])
             .then((answer) => {
-                query = 'INSERT INTO roles (name) VALUES (?)'
-                const params = answer.nameofRole;
-                db.query(query, params, function (err, results) {
+                console.log(`answer: ${answer}`)
+                let departmentSelected;
+                if (answer.departmentId === 'Marketing') {
+                    departmentSelected = 1
+                } else if (answer.departmentId === 'Legal') {
+                    departmentSelected = 2
+                } else if (answer.departmentId === 'IT') {
+                    departmentSelected = 3
+                } else if (answer.departmentId === 'HR') {
+                    departmentSelected = 4
+                } else {
+                    departmentSelected = 5
+                }
+                query = `INSERT INTO roles (title, salary, department_id) VALUES ('${answer.nameofRole}', ${answer.salary}, ${departmentSelected})`
+                // const params = answer.nameofRole;
+                db.query(query, function (err, results) {
+                    if (err) throw err;
                     console.table('Successfully added role')
                     return app.principalMenu();
                 });
             });
+            break;
+        case 'Employee':
+            inquirer.prompt([
+                {
+                    name: 'firstName',
+                    message: "Employee First Name: ",
+                },
+                {
+                    name: 'lastName',
+                    message: "Employee Last Name: ",
+                },
+                {
+                    name: 'roleID',
+                    message: "What's the role ID for this employee (integer): ",
+                },
+                {
+                    type: 'list',
+                    name: 'managerID',
+                    message: "What's the manager ID for this role: ",
+                    choices: ['Big News Morgan', 'Akagami Shanks', 'Dr. Vegapunk', 'Silvers Rayleigh'],
+                },
+            ])
+            .then((answer) => {
+                console.log(`answer: ${answer}`)
+                let managerSelected;
+                if (answer.managerID === 'Big News Morgan') {
+                    managerSelected = 3
+                } else if (answer.managerID === 'Akagami Shanks') {
+                    managerSelected = 6
+                } else if (answer.managerID === 'Dr. Vegapunk') {
+                    managerSelected = 9
+                } else {
+                    managerSelected = 12
+                }
+                query = `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ('${answer.firstName}', '${answer.lastName}', ${answer.roleID}, ${managerSelected})`
+                // const params = answer.nameofRole;
+                db.query(query, function (err, results) {
+                    if (err) throw err;
+                    console.table('Successfully added employee')
+                    return app.principalMenu();
+                });
+            });
+            break;
         default:
             console.log('There was an error')
             break;
     }
 }
 
+const update = (option) => {
+    let query = ''
+    console.log(`Add Function, you selected ${option}`)
+    switch(option) {
+        case 'Update an Employee Role':
+            console.log('success')
+            // Write your code heeeereee
+            break;
+        default:
+            console.log('There was an error')
+            break;
+    }
+}
+
+
+
 module.exports = {
     view: view,
-    add: add
+    add: add,
+    update: update
 }
