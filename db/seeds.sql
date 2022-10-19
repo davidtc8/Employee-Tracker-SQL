@@ -26,21 +26,19 @@ INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES ("Monkey D.", 'Luffy', 13, NULL),
        ("Bon", 'Clay', 14, NULL),
        ("Im", 'Sama', 15, NULL),
+      --  MKT Team
        ("Big News", 'Morgans', 3, 3),
        ("Buggy", 'The Clown', 2, 4),
        ("Nami", 'Chuan', 1, 5),
-      --  ("Buggy", 'The Clown', 2, 4),
+      --  Legal Team
        ("Akagami", 'Shanks', 6, 3),
        ("Admiral", 'Sengoku', 5, 7),
        ("Nefertari", 'Vivi', 4, 8),
-    --    ("Akagami", 'Shanks', 6, 3),
+      --   IT Team
        ("DR.", 'Vegapunk', 9, 3),  
        ("Bartholomew", 'Kuma', 8, 10), 
        ("MR.", 'Franki', 7, 11), 
-      --  ("Bartholomew", 'Kuma', 8, 10), 
-    --    ("DR.", 'Vegapunk', 9, 3), 
+      --  HR Team
        ("Silvers", 'Rayleigh', 12, 3),
        ("Emporio", 'Ivankov', 11, 13), 
        ('Nico', 'Robin', 10, 14);
-      --  ("Emporio", 'Ivankov', 11, 13); 
-    --    ("Silvers", 'Rayleigh', 12, 3); 
