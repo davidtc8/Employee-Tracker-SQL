@@ -1,6 +1,7 @@
 # SQL Database manager
-# ![license image](https://img.shields.io/badge/license-MIT-brightgreen.svg)
 You'll be able to manage an entire company through your command line interface Node.js, Inquirer, and MySQL
+
+# ![license image](https://img.shields.io/badge/license-MIT-brightgreen.svg)
 # Table of Contents
 - [Go to installation section](#-installation)
 - [Go to usage guide section](#-usage-guide)
