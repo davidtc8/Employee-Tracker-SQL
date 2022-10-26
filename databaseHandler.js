@@ -199,8 +199,168 @@ const update = (option) => {
     console.log(`Add Function, you selected ${option}`)
     switch(option) {
         case 'Update an Employee Role':
-            console.log('success')
-            // Write your code heeeereee
+            query = `SELECT * FROM employee;`;
+            db.query(query, function (err, results) {
+                if (err) throw err;
+                console.table(results)
+                inquirer.prompt([
+                        {
+                            type: 'input',
+                            name: 'employeeID',
+                            message: "What's the ID of the employee you want to update?",
+                        },
+                    ])
+                    .then((answer) => {
+                        let employeeID = answer.employeeID
+                        query = `SELECT * FROM roles;`;
+                        db.query(query, function (err, results) {
+                            if (err) throw err;
+                            console.table(results)
+                            inquirer.prompt([
+                                {
+                                    type: 'input',
+                                    name: 'roleID',
+                                    message: "What's the ID of the role you want to update?",
+                                },
+                            ])
+                            .then((answer) => {
+                                query = `UPDATE employee SET role_id = (?) WHERE id = (?)`
+                                db.query(query, [answer.roleID, employeeID], function (err, results) {
+                                    if (err) throw err;
+                                    console.table('Successfully updated role')
+                                    return app.principalMenu(); 
+                                    })
+                                });
+                            })
+                    });
+                })
+            break;
+        case 'Update an Employee Manager':
+            // Viewing the employees and their managers
+            query = `SELECT * FROM employee;`
+            db.query(query, function (err, results) {
+                if (err) throw err;
+                console.table(results)
+                inquirer.prompt([
+                        {
+                            type: 'input',
+                            name: 'employeeID',
+                            message: "What's the ID of the employee you want to update?",
+                        },
+                    ])
+                    .then((answer) => {
+                        let employeeID = answer.employeeID
+                        query = `SELECT * FROM employee;`;
+                        db.query(query, function (err, results) {
+                            if (err) throw err;
+                            console.table(results)
+                            inquirer.prompt([
+                                {
+                                    type: 'input',
+                                    name: 'managerID',
+                                    message: "What's the ID of the manager you'd like to reassign this employee to?",
+                                },
+                            ])
+                            .then((answer) => {
+                                query = `UPDATE employee SET manager_id = (?) WHERE id = (?)`
+                                db.query(query, [answer.managerID, employeeID], function (err, results) {
+                                    if (err) throw err;
+                                    console.table('Successfully updated role')
+                                    return app.principalMenu(); 
+                            })
+                        });
+                    })
+            });
+    })
+        default:
+            console.log('There was an error')
+            break;
+    }
+}
+
+const deleteOption = (option) => {
+    let query = ''
+    console.log(`Delete Function, you selected ${option}`)
+    switch(option) {
+        case 'Delete a department':
+            inquirer.prompt({
+                type: 'list',
+                name: 'departmentId',
+                message: "What department would you like to delete?",
+                choices: ['Marketing', 'Legal', 'IT', 'HR', 'Directive Border']
+            })
+            .then((answer) => {
+                console.log(`answer: ${answer.departmentId}`)
+                let departmentSelected;
+                if (answer.departmentId === 'Marketing') {
+                    departmentSelected = 1
+                } else if (answer.departmentId === 'Legal') {
+                    departmentSelected = 2
+                } else if (answer.departmentId === 'IT') {
+                    departmentSelected = 3
+                } else if (answer.departmentId === 'HR') {
+                    departmentSelected = 4
+                } else {
+                    departmentSelected = 5
+                }
+                query = `DELETE FROM department WHERE id = ${departmentSelected}`
+                // const params = answer.nameofRole;
+                db.query(query, function (err, results) {
+                    if (err) throw err;
+                    console.table('Successfully deleted department')
+                    return app.principalMenu();
+                });
+            });
+            break;
+        case 'Delete a role':
+            query = `SELECT * FROM roles;`;
+                db.query(query, function (err, results) {
+                if (err) throw err;
+                console.table(results)
+            // });
+            inquirer.prompt({
+                type: 'input',
+                name: 'roleID',
+                message: "What's the ID of the role you'd like to delete?"
+            })
+            .then((answer) => {
+                query = `DELETE FROM roles WHERE id = ${answer.roleID}`
+                // const params = answer.nameofRole;
+                db.query(query, function (err, results) {
+                    if (err) throw err;
+                    console.table('Successfully deleted role')
+                    return app.principalMenu();
+                    // Closing first db.query
+                    });
+                // Closing then
+                });
+            // Closing db.query
+            });
+            break;
+        case 'Delete an employee':
+            query = `SELECT * FROM employee;`;
+                db.query(query, function (err, results) {
+                if (err) throw err;
+                console.table(results)
+            // });
+            inquirer.prompt({
+                type: 'input',
+                name: 'employeeID',
+                message: "What's the ID of the employee you'd like to delete?"
+            })
+            .then((answer) => {
+                query = `DELETE FROM roles WHERE id = ${answer.employeeID}`
+                // const params = answer.nameofRole;
+                db.query(query, function (err, results) {
+                    if (err) throw err;
+                    console.table('Successfully deleted employee')
+                    return app.principalMenu();
+                    // Closing first db.query
+                    });
+                // Closing then
+                });
+            // Closing db.query
+            });
             break;
         default:
             console.log('There was an error')
@@ -208,10 +368,9 @@ const update = (option) => {
     }
 }
 
-
-
 module.exports = {
     view: view,
     add: add,
-    update: update
+    update: update,
+    deleteOption: deleteOption
 }
