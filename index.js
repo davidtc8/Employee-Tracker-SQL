@@ -11,17 +11,22 @@ const principalMenu = () => {
     })
     .then((answer) => {
         switch(answer.principalMenu) {
+            // View option
             case 'View':
                 showMenu();
                 break;
+            // Add option
             case 'Add':
                 add();
                 break;
-            // create an update Menu
+            // Update option
             case 'Update':
                 update();
                 break;
-            // create a Delete Menu
+            // Delete option
+            case 'Delete':
+                deleteSQL();
+                break;
             default:
                 process.exit();
         }
@@ -48,6 +53,7 @@ const showMenu = () => {
     });
 }
 
+// Calling the add function
 const add = () => {
     inquirer.prompt({
         type: 'list',
@@ -61,6 +67,7 @@ const add = () => {
     });
 }
 
+// Calling the update function
 const update = () => {
     inquirer.prompt({
         type: 'list',
@@ -73,6 +80,20 @@ const update = () => {
         db.update(answer.updateTable)
     });
 };
+
+// Calling the delete function
+const deleteSQL = () => {
+    inquirer.prompt({
+        type: 'list',
+        name: 'deleteOption',
+        message: 'viewing',
+        choices: ['Delete a department','Delete a role', 'Delete an employee', '<< Go Back']
+    })
+    .then((answer) => {
+        if (answer.deleteOption === '<< Go Back'){return principalMenu();}
+        db.deleteOption(answer.deleteOption)
+    })
+}
 
 // Initialize the principal menu
 principalMenu();
