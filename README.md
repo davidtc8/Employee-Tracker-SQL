@@ -12,9 +12,9 @@ You'll be able to manage an entire company through your command line interface N
 # Installation
 Just clone the repository and run "node ./index.js"
 # Usage Guide
-He can use it for his own company
+The user can use this application to manage his own company through SQL
 # Contribution Guidelines
-None
+David Torres
 # Test Instructions
 None
 # License
